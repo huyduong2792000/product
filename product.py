@@ -144,7 +144,7 @@ while True:
     quyentruycap=CapQuyenTruyCap()
     if quyentruycap=='nhanvien': QuyenNhanVien()
     elif quyentruycap=='quanly':QuyenQuanLy()
-    luachon=input('\33[36mban co muon thoat khong( bam k de ket thuc): ')
-    if luachon=='k':break
+    luachon=input('\33[36mban co muon thoat khong( bam "c" de ket thuc): ')
+    if luachon=='c':break
 #thaotacfile.GhiFileLoaiHangHoa(danhsachloaihanghoa)
 #thaotacfile.GhiFileNhanVien(danhsachnhanvien)
