@@ -6,12 +6,13 @@ import nhanvien
 import thaotacfile
 listhoadon=[{'tenkhachhang': 'adsv', 'ngayhoadon': 12, 'sohoadon': '12', 'hangdamua': [{'tenhang': 'coca', 'dongia': 100000, 'soluong': 20, 'thanhtien': 2000000, 'loaihanghoa': 'do uong'}],'tongtientruocthue':180000, 'tongtiensauthue': 2000000}]
  #lu tru nhieu hoa don cua nhieu khach hang
-danhsachloaihanghoa=[{'tenloaihanghoa': 'do uong11111111', 'danhsachhanghoatrongloai': ['pepsi', 'coca']},{'tenloaihanghoa': 'do an', 'danhsachhanghoatrongloai': ['asf', 'dasfsaf']}]
+danhsachloaihanghoa=[]
 danhsachnhanvien=[{'tennhanvien': 'huy', 'quequan': 'tn', 'tuoi': '20', 'socmnd': '123', 'mucluong': 10.0}]
-
+danhsachhanghoa=[]
+#load
 danhsachloaihanghoa=thaotacfile.LoadDsLoaiHangHoa()
 danhsachnhanvien=thaotacfile.LoadDsNhanVien()
-
+danhsachhanghoa=thaotacfile.LoadDsHanghoa()
 def TinhDoanhThuTheoNgay():
     listhoadon=thaotacfile.LoadDsHoaDon()
     while True:
@@ -28,7 +29,25 @@ def TinhDoanhThuTheoNgay():
         if (ngay['ngayhoadon'] in range(ngaybatdau,ngayketthuc+1)):
             doanhthu+=ngay['tongtiensauthue']
     print('danh thu tu ngay {0} den ngay {1} la: {2} '.format(ngaybatdau,ngayketthuc,doanhthu))
-
+def TimHangBanChayTheoSoLuong():
+    listhoadon=thaotacfile.LoadDsHoaDon()
+    soluongmax=0
+    tenhanghoa_banduoc_max=''
+    for idx in listhoadon:
+        for hanghoa in idx['hangdamua']:
+            if hanghoa['hangdamua']['soluong']>soluongmax:
+                soluongmax=hanghoa['hangdamua']['soluong']
+                tenhanghoa_banduoc_max=hanghoa['hangdamua']['tenhang']
+    return tenhanghoa_banduoc_max
+def TimHangBanChayTheoDoanhThu():
+    listhoadon=thaotacfile.LoadDsHoaDon()
+    doanhthumax=0
+    tenhanghoa_banduoc_doanhthumax=''
+    for idx in listhoadon:
+        for hanghoa in idx['hangdamua']:
+            if hanghoa['hangdamua']['thanhtien']>doanhthumax:
+                doanhthumax=hanghoa['hangdamua']['thanhtien']
+                tenhanghoa_banduoc_doanhthumax=hanghoa['hangdamua']['tenhang']
 def menu(*tenchucnang):
     chuoi_dai_nhat=0
     for timchieudaichuoi in tenchucnang:

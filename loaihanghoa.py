@@ -1,37 +1,28 @@
 import thaotacfile
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-def TaoLoaiHangHoa(tenloaihanghoa,tenhanghoa,danhsachloaihanghoa):
-    danhsachloaihanghoa=thaotacfile.LoadDsLoaiHangHoa()
-    for idx in danhsachloaihanghoa:
-        if tenloaihanghoa==idx['tenloaihanghoa']:
-            if tenhanghoa in idx['danhsachhanghoatrongloai']:
-                return
-            else:
-                idx['danhsachhanghoatrongloai'].append(tenhanghoa)
-                return
-    loai_hanghoa_canthem={}
-    loai_hanghoa_canthem['tenloaihanghoa']=tenloaihanghoa
-    loai_hanghoa_canthem['danhsachhanghoatrongloai']=[tenhanghoa]
-    danhsachloaihanghoa.append(loai_hanghoa_canthem)
-    thaotacfile.GhiFileLoaiHangHoa(danhsachloaihanghoa)
-def XemLoaiHangHoa(danhsachloaihanghoa):
-    danhsachloaihanghoa=thaotacfile.LoadDsLoaiHangHoa()
-    for idx in danhsachloaihanghoa:
-        print (bcolors.WARNING+idx['tenloaihanghoa'].upper())
-        for hanghoa in idx['danhsachhanghoatrongloai']:
-            print('\33[35m'+hanghoa)
-def ThemLoaiHangHoaTrucTiep():
-    tenloaihanghoa=input('nhap ten loai hang hoa can them ')
+danhsachloaihanghoa=thaotacfile.XuLyFileLoaiHangHoa.LoadDsLoaiHangHoa()
+def KiemTraID(id,danhsachloaihanghoa):
+    for loaihanghoa in danhsachloaihanghoa:
+        if id==loaihanghoa['ID']:
+            return False
+    return True
+#main start
+def TaoLoaiHangHoa (danhsachloaihanghoa):
     while True:
-        ten_hanghoa_trongloai=input('nhap ten loai hang hoa trong loai: ')
-        TaoLoaiHangHoa(tenloaihanghoa,ten_hanghoa_trongloai,danhsachloaihanghoa)
-        chon=input('ban muon nhap hang hoa trong loai nua khong( bam k de thoat): ')
-        if chon=='k':return
+        id=input('nhap id loai hang hoa can them: ')
+        check_id=KiemTraID(id,danhsachloaihanghoa)
+        if check_id==False:
+            print('ID nay da duoc su dung vui long nhap ID khac ')
+        elif check_id==True:
+            loai_hanghoa_canthem = {}
+            loai_hanghoa_canthem['ID']=id
+            loai_hanghoa_canthem['NAME']=input('nhap ten loai hang hoa can them ')
+            print('da them loai hang hoa xong')
+            opject=thaotacfile.XuLyFileLoaiHangHoa(loai_hanghoa_canthem)
+            opject.AppendFileCsv()
+            break
+def XemLoaiHangHoa(danhsachloaihanghoa):
+    for idx in danhsachloaihanghoa:
+        print ('\033[0;33m'+idx['ID']+'\033[0;35m '+idx['NAME'])
+#main end
+if __name__ == '__main__':
+    XemLoaiHangHoa(danhsachloaihanghoa)
