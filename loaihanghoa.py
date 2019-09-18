@@ -1,6 +1,6 @@
 import thaotacfile
 danhsachloaihanghoa=thaotacfile.XuLyFileLoaiHangHoa.LoadDsLoaiHangHoa()
-def KiemTraID(id,danhsachloaihanghoa):
+def KiemTraIDLoaiHangHoa(id,danhsachloaihanghoa):
     for loaihanghoa in danhsachloaihanghoa:
         if id==loaihanghoa['ID']:
             return False
@@ -9,16 +9,17 @@ def KiemTraID(id,danhsachloaihanghoa):
 def TaoLoaiHangHoa (danhsachloaihanghoa):
     while True:
         id=input('nhap id loai hang hoa can them: ')
-        check_id=KiemTraID(id,danhsachloaihanghoa)
+        check_id=KiemTraIDLoaiHangHoa(id,danhsachloaihanghoa)
         if check_id==False:
             print('ID nay da duoc su dung vui long nhap ID khac ')
         elif check_id==True:
             loai_hanghoa_canthem = {}
             loai_hanghoa_canthem['ID']=id
             loai_hanghoa_canthem['NAME']=input('nhap ten loai hang hoa can them ')
-            print('da them loai hang hoa xong')
             opject=thaotacfile.XuLyFileLoaiHangHoa(loai_hanghoa_canthem)
             opject.AppendFileCsv()
+            danhsachloaihanghoa.append(loai_hanghoa_canthem)
+            print('da them loai hang hoa xong')
             break
 def XemLoaiHangHoa(danhsachloaihanghoa):
     for idx in danhsachloaihanghoa:

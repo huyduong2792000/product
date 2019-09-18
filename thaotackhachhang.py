@@ -31,13 +31,15 @@ def NhapKhachhang(khachhang):
         else:print('so hoa don nay da ton tai ')
     khachhang['sohoadon']=sohoadon
     khachhang['tenkhachhang']=input('nhap ten khach hang ')
-    khachhang['ngayhoadon']=int(input('nhap ngay hoa don( nhap so) '))
     while True:
-        thue=input('nhap thue')
+        ngayhoadon=input('nhap ngay hoa don(phai la so) ')
+        thue=input('nhap thue( phai la so) ')
         try:
-            thue=int(thue)
+            ngayhoadon=int(ngayhoadon)
+            thue=float(thue)
             break
         except:
-            print('\33[91mxin moi nhap lai thue: ')
+            print('\33[91mxin moi nhap lai: ')
     khachhang['thue']=thue
+    khachhang['ngayhoadon']=ngayhoadon
     print('\33[92m')
