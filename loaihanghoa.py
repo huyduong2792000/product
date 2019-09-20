@@ -1,5 +1,4 @@
 import thaotacfile
-danhsachloaihanghoa=thaotacfile.XuLyFileLoaiHangHoa.LoadDsLoaiHangHoa()
 def KiemTraIDLoaiHangHoa(id,danhsachloaihanghoa):
     for loaihanghoa in danhsachloaihanghoa:
         if id==loaihanghoa['ID']:

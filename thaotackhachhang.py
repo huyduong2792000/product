@@ -1,6 +1,5 @@
 import thaotacfile,os
 def TaoDanhSachKhachHangThanThiet(sotienyeucau,listhoadon):
-    listhoadon=thaotacfile.LoadDsHoaDon()
     danhsach_kh_thanthiet=[]
     for khachhang in listhoadon:
         if khachhang['tongtiensauthue'] >= sotienyeucau:
@@ -15,10 +14,10 @@ def TaoDanhSachKhachHangThanThiet(sotienyeucau,listhoadon):
     for idx in danhsach_kh_thanthiet:
         print('|'+idx['tenkhachhang'].ljust(30,' ')+'|'+idx['sotiendatra'].rjust(15,' ')+' |')
         print('+'+'+'.rjust(31,'-')+'+'.rjust(17,'-'))
-
+    return danhsach_kh_thanthiet
 def XemDanhSachKhachHang(listhoadon):
-    TaoDanhSachKhachHangThanThiet(0,listhoadon)
-
+    danhsachkhachhang=TaoDanhSachKhachHangThanThiet(0,listhoadon)
+    return danhsachkhachhang
 def KiemTraSoHoaDon(sohoadon):
     kiemtra=os.listdir('dirtree/thang1/danhsachhoadon')
     if (sohoadon+'.json') in kiemtra:
@@ -43,3 +42,6 @@ def NhapKhachhang(khachhang):
     khachhang['thue']=thue
     khachhang['ngayhoadon']=ngayhoadon
     print('\33[92m')
+if __name__=='__main__':
+    listhoadon = thaotacfile.XuLyFileHoaDon.LoadDsHoaDon()
+    print(XemDanhSachKhachHang(listhoadon))

@@ -19,13 +19,14 @@ def LoadUser(danhsachuser):
     danhsachuser=thaotacfile.XuLyFileUser.LoadDsUser()
     return danhsachuser
 def ReadUser(danhsachuser):
-    LoadUser()
+    LoadUser(danhsachuser)
     while True:
         account = input('nhap tai khoan can tim ')
         user = KiemTraAccount(account,danhsachuser)
         if user==False:
             print('khong tim thay tai khoan nay')
         else:
+            print('pass word cua ban la: ')
             print(user['pass'])
             break
 def CreateUser(danhsachuser,iduser=None):
@@ -85,16 +86,15 @@ def DeleteUser(danhsachuser):
 def LogIn(danhsachuser):
     danhsachuser = LoadUser(danhsachuser)
     acc_log=input('nhap ten tai khoan ')
+    password = input('nhap password: ')
     check_acc=KiemTraAccount(acc_log,danhsachuser)
-    while True:
-        if acc_log==False:
-            print('khong tim thay tai khoan nay')
-        elif:
-            password=input('nhap password: ')
-            if password==check_acc['pass']:
-                return True
-            else:
-                print('sai thongtin tai khoan hoac mat khau ')
+    if check_acc==False:
+        return False
+    else:
+        if password==check_acc['pass']:
+            return True
+        else:
+            return False
 def LogUot():
     chon=input('ban co that su muon dang xuat khong( an c de dang xuat): ')
     if chon=='c':

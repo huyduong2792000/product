@@ -9,7 +9,7 @@ def TongTien(danhsach_hanghoa_tronghoadon,thue):
     tongtiensauthue=tongtientruocthue+tongtientruocthue*thue/100
     return tongtientruocthue,tongtiensauthue
 
-def Them1HoaDon(danhsachhanghoa,danhsachhangtrongkho):
+def Them1HoaDon(danhsachhanghoa,danhsachhangtrongkho,listhoadon):
     khachhang={}
     thaotackhachhang.NhapKhachhang(khachhang)
     hanghoa={}
@@ -22,6 +22,7 @@ def Them1HoaDon(danhsachhanghoa,danhsachhangtrongkho):
         print('\33[92mban co muon nhap nua khong( an k de thoat)')
         chon = input()
         if chon == 'k':
+            listhoadon.append(khachhang)
             opject=thaotacfile.XuLyFileHoaDon(khachhang)
             opject.MakeFileJson()
             return khachhang
@@ -60,7 +61,7 @@ def NhapHangHoa(hanghoa,danhsachhanghoa,danhsachhangtrongkho):
             break
     hanghoa['ID'] = idhanghoa
     hanghoa['dongia']=float(idxhanghoa['PRICE'])
-    hanghoa['loaihanghoa']=idxhanghoa['GENERIC']
+    hanghoa['loaihanghoa']=idxhanghoa['loaihanghoa']
     while True:
         soluong=input('nhap so luong hang hoa ')
         try:
@@ -69,17 +70,28 @@ def NhapHangHoa(hanghoa,danhsachhanghoa,danhsachhangtrongkho):
             break
         except:
             print('xin moi nhap lai so luong ')
-    khohang.HoaDonXuatKho(idhanghoa,soluong,danhsachhangtrongkho)
+    khohang.HoaDonXuatKho(idhanghoa, soluong, danhsachhangtrongkho)
     hanghoa['thanhtien'] = hanghoa['dongia'] * hanghoa['soluong']
-def XuaHoaDon(sohoadoncanxua,danhsachhanghoa):
-    XoaHoaDon(sohoadoncanxua)
+def KiemTraSoHoaDon(sohoadoncankiemtra,listhoadon):
+    for idx in range(len(listhoadon)):
+        if listhoadon[idx]['sohoadon']==sohoadoncankiemtra:
+            return listhoadon[idx]
+    return False
+def XuaHoaDon(sohoadoncanxua,danhsachhanghoa,danhsachhangtrongkho,listhoadon):
+    XoaHoaDon(sohoadoncanxua,listhoadon)
     print('\33[33mNHAP THONG TIN HOA DON MOI')
-    Them1HoaDon(danhsachhanghoa)
+    Them1HoaDon(danhsachhanghoa,danhsachhangtrongkho,listhoadon)
     return
 
-def XoaHoaDon(sohoadoncanxoa):
-    opject = thaotacfile.XuLyFileHoaDon(filename=sohoadoncanxoa)
-    opject.RemoveFile()
+def XoaHoaDon(sohoadoncanxoa,listhoadon):
+    check=KiemTraSoHoaDon(sohoadoncanxoa,listhoadon)
+    if check!=False:
+        listhoadon.remove(check)
+        opject = thaotacfile.XuLyFileHoaDon(filename=sohoadoncanxoa)
+        opject.RemoveFile()
+        print('da xoa xong ')
+    else:
+        print('khong tim thay so hoa don nay ')
     return
 
 if __name__=='__main__':
