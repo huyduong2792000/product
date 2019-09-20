@@ -1,4 +1,4 @@
-import thaotacfile,quanlyuser,hoadon,thaotachanghoa,loaihanghoa,thaotackhachhang,khohang
+import thaotacfile,quanlyuser,hoadon,thaotachanghoa,loaihanghoa,thaotackhachhang,khohang,test
 danhsachhoadon=[]
 danhsachloaihanghoa=[]
 danhsachuser=[]
@@ -65,7 +65,7 @@ def Xoa():
     elif chon=='2':
         quanlyuser.DeleteUser(danhsachuser)
 def Khac():
-    menu('NHAP KHO','TIM HANG BAN CHAY THEO DOANH THU','TIM HANG BAN CHAY THEO SL','XEM SL KHAC HANG')
+    menu('NHAP KHO','TIM HANG BAN CHAY THEO DOANH THU','TIM HANG BAN CHAY THEO SL','XEM SL KHAC HANG','BIEU DO SL')
     chon=input('nhap lua chon cua ban vao day: ')
     if chon=='1':
         khohang.NhapKho(danhsachhangtrongkho)
@@ -75,6 +75,8 @@ def Khac():
         thaotachanghoa.TimHangBanChayTheoSoLuong()
     elif chon=='4':
         print('so luong khach hang la: ',len(thaotackhachhang.XemDanhSachKhachHang(listhoadon)))
+    elif chon=='5':
+        test.display()
 def LuaChon():
     menu('TAO','XEM','XUA','XOA','KHAC','DANG XUAT')
     chon=input('nhap lua chon cua ban vao day ')
