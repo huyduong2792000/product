@@ -1,4 +1,4 @@
-import os,thaotacfile,thaotackhachhang,thaotachanghoa,khohang
+import json,thaotacfile,thaotackhachhang,thaotachanghoa,khohang
 danhsachhanghoa=thaotacfile.XuLyFileHangHoa.LoadDsHangHoa()
 danhsachhangtrongkho=thaotacfile.XuLyFileKhoHang.LoadDsHangTonKho()
 def TongTien(danhsach_hanghoa_tronghoadon,thue):
@@ -28,25 +28,27 @@ def Them1HoaDon(danhsachhanghoa,danhsachhangtrongkho,listhoadon):
             return khachhang
 
 def XemHoaDon(sohoadoncanxem):
-    thongtinhoadon=thaotacfile.XemFileHoaDon(sohoadoncanxem)
+    thongtinhoadon = {}
+    with open('dirtree/thang1/danhsachhoadon/'+sohoadoncanxem+'.json') as rfile:
+        thongtinhoadon = json.load(rfile)
     STT=0
     try:
         print('\33[93mso hoa don: '+str(thongtinhoadon['sohoadon']))
     except:return
     print('ngay hoa don: '+str(thongtinhoadon['ngayhoadon']))
     print('ten khach hang: '+str(thongtinhoadon['tenkhachhang']))
-    print('+-----+--------------+----------+---------+------------+')
-    print('| STT | TEN HANG HOA | SO LUONG | DON GIA | THANH TIEN |')
-    print('+-----+--------------+----------+---------+------------+')
+    print('+-----+--------------+----------+---------+---------------+------------+')
+    print('| STT | TEN HANG HOA | SO LUONG | DON GIA | LOAI HANG HOA | THANH TIEN |')
+    print('+-----+--------------+----------+---------+---------------+------------+')
     for hanghoa in thongtinhoadon['hangdamua']:
         STT+=1
-        print('|'+str(STT).rjust(5,' ')+'|'+str(hanghoa['tenhang']).rjust(14,' ')+'|'+str(hanghoa['soluong']).rjust(10,' ')+'|'+str(hanghoa['dongia']).rjust(9,' ')+'|'+str(hanghoa['thanhtien']).rjust(12,' ')+'|')
-        print('+-----+--------------+----------+---------+------------+')
-    print('|                     TONG TIEN TRUOC THUE|'+str(thongtinhoadon['tongtientruocthue']).rjust(12,' ')+'|')
-    print('+-----+--------------+----------+---------+------------+')
-    print('|                       TONG TIEN SAU THUE|'+str(thongtinhoadon['tongtiensauthue']).rjust(12,' ')+'|')
-    print('+-----+--------------+----------+---------+------------+')
-    print('               -- design by huy duong --                ')
+        print('|'+str(STT).rjust(5,' ')+'|'+str(hanghoa['ID']).rjust(14,' ')+'|'+str(hanghoa['soluong']).rjust(10,' ')+'|'+str(hanghoa['dongia']).rjust(9,' ')+'|'+str(hanghoa['loaihanghoa']).rjust(len('---------------'),' ')+'|'+str(hanghoa['thanhtien']).rjust(12,' ')+'|')
+        print('+-----+--------------+----------+---------+---------------+------------+')
+    print('|                                    TONG TIEN TRUOC THUE |'+str(thongtinhoadon['tongtientruocthue']).rjust(12,' ')+'|')
+    print('+-----+--------------+----------+---------+---------------+------------+')
+    print('|                                      TONG TIEN SAU THUE |'+str(thongtinhoadon['tongtiensauthue']).rjust(12,' ')+'|')
+    print('+-----+--------------+----------+---------+---------------+------------+')
+    print('                        -- design by huy duong --                       ')
 def NhapHangHoa(hanghoa,danhsachhanghoa,danhsachhangtrongkho):
     while True:
         idhanghoa=input('nhap id hang hoa can them: ')

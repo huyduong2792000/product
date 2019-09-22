@@ -58,11 +58,13 @@ def display():
     slmax = TimThangMax()
     thongkesoluong = XuLyTongSoLuong()
     thongkesoluong.sort(key=sapxepthang)
-    print(thongkesoluong)
-    for sl in range(slmax[1],0,-1000):
+    # print(thongkesoluong)
+    for sl in range(slmax[1],0,-slmax[1]//10):
         print('\n')
         print('\33[34m'+str(sl).rjust(5,' '),end='')
         for i in range(7):
             print('       '+lineprint(sl,thongkesoluong[i]['soluong']),end='')
     print('\n  0________________________________________________________________________________________________>')
     print('\n\33[33m           THANG1       THANG2       THANG3       THANG4       THANG5       THANG6       THANG7')
+if __name__=='__main__':
+    display()

@@ -37,15 +37,18 @@ def Tao():
     elif chon=='3':
         loaihanghoa.TaoLoaiHangHoa(danhsachloaihanghoa)
 def Xem():
-    menu('XEM DANH SACH LOAI HANG HOA','XEM DANH SACH HANG HOA','XEM DANH SACH KHACH HANG','XEM DANH SACH KHACH HANG THAN THIET')
+    menu('XEM HOA DON','XEM DANH SACH LOAI HANG HOA','XEM DANH SACH HANG HOA','XEM DANH SACH KHACH HANG','XEM DANH SACH KHACH HANG THAN THIET')
     chon=input('nhap lua chon cua ban vao day: ')
     if chon=='1':
-        loaihanghoa.XemLoaiHangHoa(danhsachloaihanghoa)
+        sohoadoncanxem=input('nhap so hoa don can xem: ')
+        hoadon.XemHoaDon(sohoadoncanxem)
     elif chon=='2':
-        thaotachanghoa.XemHangHoa(danhsachhanghoa)
+        loaihanghoa.XemLoaiHangHoa(danhsachloaihanghoa)
     elif chon=='3':
-        thaotackhachhang.XemDanhSachKhachHang(listhoadon)
+        thaotachanghoa.XemHangHoa(danhsachhanghoa)
     elif chon=='4':
+        thaotackhachhang.XemDanhSachKhachHang(listhoadon)
+    elif chon=='5':
         sotien_toithieu=float(input('nhap so tien toi thieu de loc '))
         thaotackhachhang.TaoDanhSachKhachHangThanThiet(sotien_toithieu,listhoadon)
 def Xua():
